@@ -1,0 +1,262 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 50%,
+            rgba(42, 35, 100, 0.35),
+            transparent 55%
+        ),
+        radial-gradient(
+            ellipse at 15% 25%,
+            rgba(31, 65, 130, 0.30),
+            transparent 45%
+        ),
+        radial-gradient(
+            ellipse at 85% 75%,
+            rgba(100, 35, 110, 0.25),
+            transparent 45%
+        ),
+        #02030b;
+
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* =================================
+   NEBULOSAS ANIMADAS
+================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: -20%;
+
+    background:
+        radial-gradient(
+            ellipse at 30% 40%,
+            rgba(75, 55, 180, 0.22),
+            transparent 35%
+        ),
+        radial-gradient(
+            ellipse at 70% 60%,
+            rgba(30, 100, 190, 0.20),
+            transparent 40%
+        ),
+        radial-gradient(
+            ellipse at 50% 80%,
+            rgba(150, 55, 160, 0.16),
+            transparent 35%
+        );
+
+    filter: blur(45px);
+
+    animation: nebula 15s ease-in-out infinite alternate;
+
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes nebula {
+    from {
+        transform: translate(-2%, -1%) scale(1);
+    }
+
+    to {
+        transform: translate(2%, 2%) scale(1.15);
+    }
+}
+
+/* =================================
+   CANVAS ESPACIAL
+================================= */
+
+#starfield {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* =================================
+   CONTENIDO PRINCIPAL
+================================= */
+
+.container {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    padding: 30px 20px;
+
+    text-align: center;
+}
+
+/* =================================
+   ENCABEZADO
+================================= */
+
+header h1 {
+    font-size: clamp(3rem, 8vw, 5rem);
+    letter-spacing: 12px;
+
+    color: #e2e7ff;
+
+    text-shadow:
+        0 0 10px #819aff,
+        0 0 30px #718cff,
+        0 0 60px #5366d9;
+}
+
+.subtitle {
+    color: #899bc9;
+    letter-spacing: 7px;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+/* =================================
+   CONTADOR
+================================= */
+
+.counter-section {
+    margin-top: 90px;
+}
+
+.description {
+    font-size: 22px;
+    color: #cbd5f5;
+    margin-bottom: 35px;
+}
+
+.counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+}
+
+.time-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    min-width: 100px;
+}
+
+.time-box span {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: bold;
+
+    color: #dbe4ff;
+
+    text-shadow:
+        0 0 10px #718cff,
+        0 0 25px #718cff,
+        0 0 45px #5366d9;
+
+    font-variant-numeric: tabular-nums;
+}
+
+.time-box small {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #8295c5;
+}
+
+.separator {
+    font-size: 40px;
+    color: #7385b8;
+    margin-bottom: 25px;
+}
+
+.start-date {
+    margin-top: 40px;
+    color: #899bc9;
+    font-size: 13px;
+}
+
+/* =================================
+   FOOTER
+================================= */
+
+footer {
+    margin-top: 90px;
+
+    color: #a8b5d9;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+.interaction-hint {
+    margin-top: 35px;
+
+    font-size: 11px;
+    letter-spacing: 2px;
+
+    color: #a0b0df;
+    opacity: 0.8;
+}
+
+/* =================================
+   RESPONSIVE
+================================= */
+
+@media (max-width: 550px) {
+
+    .counter {
+        gap: 7px;
+    }
+
+    .time-box {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .time-box small {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .separator {
+        font-size: 22px;
+    }
+
+    .counter-section {
+        margin-top: 65px;
+    }
+
+    footer {
+        margin-top: 65px;
+    }
+
+    .interaction-hint {
+        font-size: 9px;
+    }
+}
+
+/* =================================
+   REDUCIR MOVIMIENTO
+================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    body::before {
+        animation: none;
+    }
+}

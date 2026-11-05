@@ -1,0 +1,352 @@
+
+/* ========================================
+   ESCENA PRINCIPAL
+======================================== */
+
+.carta-escena {
+  min-height: 100vh;
+  min-height: 100svh;
+  box-sizing: border-box;
+  padding: 35px 18px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(circle, #fff8f1, #f0d9d4);
+  color: #70444c;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.sobre-pantalla,
+.carta-revelada {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.carta-etiqueta {
+  color: #ad5364;
+  font: 10px Arial, sans-serif;
+  letter-spacing: 0.22em;
+}
+
+.sobre-titulo {
+  margin: 4px 0 10px;
+  font-size: clamp(27px, 6vw, 38px);
+  font-weight: normal;
+  color: #702b3b;
+  text-shadow: 0 1px 1px rgba(80, 25, 40, 0.12);
+}
+
+.sobre-instruccion {
+  margin: 0 0 25px;
+  color: #986f75;
+  font: 13px Arial, sans-serif;
+}
+
+/* ========================================
+   SOBRE
+======================================== */
+
+.sobre {
+  position: relative;
+  isolation: isolate;
+  width: min(82vw, 340px);
+  aspect-ratio: 1.5;
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  perspective: 900px;
+  animation: flotar 3s ease-in-out infinite;
+}
+
+.sobre:disabled {
+  cursor: default;
+  animation: none;
+}
+
+/* Cuerpo base */
+
+.sobre-fondo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 4px;
+  background: #d9bea0;
+}
+
+/* Papel dentro del sobre */
+
+.sobre-papel {
+  position: absolute;
+  z-index: 1;
+  top: 4%;
+  left: 8%;
+  width: 84%;
+  height: 91%;
+  box-sizing: border-box;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #fff8eb;
+  border: 1px solid #e3cbb1;
+  color: #8f4557;
+  font-size: 14px;
+  transform: translateY(0);
+  transition: transform 1s cubic-bezier(.2, .75, .25, 1);
+}
+
+.papel-corazon {
+  color: #b9435b;
+  font-size: 25px;
+}
+
+/* Solapa trasera triangular */
+
+.sobre-solapa {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(145deg, #f3e1ca, #d8b99a);
+  clip-path: polygon(0 0, 100% 0, 50% 62%);
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  transition: transform .7s ease;
+  backface-visibility: hidden;
+  pointer-events: none;
+}
+
+/* Parte frontal: laterales y fondo del sobre */
+
+.sobre-frente {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: linear-gradient(135deg, #f0dcc3, #e3c6a7);
+  clip-path: polygon(
+    0 0,
+    50% 43%,
+    100% 0,
+    100% 100%,
+    0 100%
+  );
+  pointer-events: none;
+}
+
+/* Sello */
+
+.sobre-sello {
+  position: absolute;
+  z-index: 4;
+  top: 48%;
+  left: 50%;
+  width: 45px;
+  height: 45px;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  border: 2px solid #a64a55;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #d76b75, #922d42);
+  color: #ffe6db;
+  font-size: 23px;
+  transform: translate(-50%, -50%);
+  transition: opacity .25s ease, transform .3s ease;
+}
+
+/* ========================================
+   ANIMACIÓN DE APERTURA
+======================================== */
+
+.sobre-abierto {
+  animation: none;
+}
+
+/* La solapa se levanta */
+
+.sobre-abierto .sobre-solapa {
+  transform: rotateX(180deg);
+}
+
+/* El papel sale hacia arriba */
+
+.sobre-abierto .sobre-papel {
+  transform: translateY(-78%);
+}
+
+/* El sello desaparece */
+
+.sobre-abierto .sobre-sello {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.4);
+  pointer-events: none;
+}
+
+.sobre-pie {
+  margin-top: 28px;
+  color: #a17a7c;
+  font: 12px Arial, sans-serif;
+}
+
+/* ========================================
+   CARTA COMPLETA
+======================================== */
+
+.carta-revelada {
+  gap: 25px;
+  animation: aparecer .65s ease both;
+}
+
+.carta-papel-completo {
+  position: relative;
+  width: min(100%, 390px);
+  min-height: 440px;
+  box-sizing: border-box;
+  padding: 32px 26px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(130deg, #fffaf0, #f8edda);
+  border: 1px solid #dfc5a7;
+  box-shadow: 0 12px 32px #6b3f3426;
+  text-align: center;
+}
+
+.carta-papel-completo::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 1px solid #e4c8bb;
+  pointer-events: none;
+}
+
+.carta-decoracion,
+.carta-corazon-final {
+  color: #b7475b;
+  font-size: 26px;
+}
+
+.carta-saludo {
+  color: #702b3b;
+  font-size: clamp(28px, 6vw, 38px);
+  font-weight: normal;
+  margin: 8px 0 14px;
+  text-shadow: 0 1px 1px rgba(80, 25, 40, 0.12);
+}
+
+.carta-separador {
+  width: 48px;
+  height: 1px;
+  margin: 19px 0;
+  background: #d9b4a7;
+}
+
+.carta-mensaje {
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.carta-mensaje p {
+  margin: 0 0 14px;
+}
+
+.carta-firma {
+  margin-top: auto;
+  padding-top: 20px;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.7;
+}
+
+.carta-firma strong {
+  display: block;
+  font-weight: normal;
+}
+
+.carta-corazon-final {
+  margin-top: 13px;
+}
+
+/* ========================================
+   BOTÓN CONTINUAR
+======================================== */
+
+.carta-continuar {
+  padding: 14px 32px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #c34d65, #942c47);
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 7px 18px #a03c4b35;
+  transition: transform .2s ease;
+}
+
+.carta-continuar:hover {
+  transform: translateY(-3px);
+}
+
+.carta-continuar:focus-visible {
+  outline: 3px solid #8f263d;
+  outline-offset: 4px;
+}
+
+/* ========================================
+   ANIMACIONES
+======================================== */
+
+@keyframes flotar {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 420px) {
+  .carta-papel-completo {
+    padding: 28px 23px;
+  }
+}
+
+/* Accesibilidad: movimiento reducido */
+
+@media (prefers-reduced-motion: reduce) {
+  .sobre {
+    animation: none;
+  }
+
+  .sobre-solapa,
+  .sobre-papel,
+  .sobre-sello,
+  .carta-revelada,
+  .carta-continuar {
+    transition-duration: .01ms;
+    animation-duration: .01ms;
+  }
+}
